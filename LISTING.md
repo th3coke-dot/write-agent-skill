@@ -1,70 +1,49 @@
 # Paid pack listing (not published)
 
-Product: write-agent-skill (skill-writer)
+Product: write-agent-skill
 Version: 0.1.0
-Compiled: 2026-08-16 by Work (an AI agent)
-File: write-agent-skill-v0.1.0.zip
-Suggested rails: Polar (file download) or Gumroad (zip)
-Suggested price: USD 24 one-time
-Sibling: ai-author-platform-rules pack at USD 19 (already published as a repo; do not copy its dataset)
-Status: not listed. No store account created.
+Price: USD 24 one-time
+Rails: Polar or Gumroad
+Status: not listed
 
-## What the buyer gets
+## What it is, in plain words
 
-- A drop-in Agent Skill that turns a described workflow into a spec-valid skill directory
-- `scripts/validate_skill.py` (works without `skills-ref`)
-- `scripts/new_skill.py` scaffolder
-- Cited spec notes (agentskills.io, 2026-08-16)
-- A minimal `SKILL.md` template
-- Tests: `python3 tests/test_all.py`
+If you just ask an agent to write a skill, it will try. A lot of the time it hands you something that looks like a skill and does not work. Wrong name. Folder that does not match. A description like "helps with PDFs." Extra fields the spec does not allow. No check at the end. The skill sits there and never turns on.
+
+You are not buying "an AI that can write." You already have that.
+
+You are buying a locked recipe plus a fail test. One job. Words people actually type. Name matches the folder. No made-up fields. The test says OK or it does not ship.
+
+## Why pay
+
+So the next skill you publish actually fires when someone asks for it.
+
+## Why not pay
+
+If you already know the spec and you always run a validator yourself, asking an agent for free is enough.
+
+## What is in the zip
+
+- The skill (drop into .agents/skills/write-agent-skill)
+- A validator: python3 scripts/validate_skill.py ./your-skill
+- A scaffolder: python3 scripts/new_skill.py
+- Tests
 - MIT license
-- Honest AI authorship disclosure
+- A note that Work (an AI) compiled this. Not legal advice. Not a promise of sales.
 
-## What they do not get
+## Listing copy (paste this)
 
-- A listing, ranking, or install on any marketplace
-- Legal advice
-- A license for an AI to create store accounts or complete KYC
-- The sibling platform-rules dataset
-- Exclusive copyright in raw model prose
-
-## Who this is for
-
-People trying to publish skills. 2026 skill install charts are dominated by three free publishers. A paid skill has to do a shipping job those packs do not. "skill-writer meta-Skills" is a named 2026 category. This pack is that job.
-
-## Free vs paid
-
-- Sibling (separate SKU, USD 19): `th3coke-dot/ai-author-platform-rules` — can I publish X on Y?
-- This SKU (USD 24): write the skill so it triggers
-- Do not bundle the sibling dataset into this zip
-
-## Listing copy
-
-Title: Skill-writer for Agent Skills (SKILL.md that triggers)
+Title: Stop shipping skills that never turn on
 
 Body:
-Turn a described workflow into a spec-valid Agent Skill directory (SKILL.md plus optional scripts, references, and assets) that actually triggers. Includes a Python validator, a scaffolder, cited agentskills.io notes (2026-08-16), and tests. Compiled by Work, an AI, on 2026-08-16. Not legal advice. A human must own store accounts and payouts. Not a guarantee of installs or revenue.
+Ask an agent to "write a skill" and you often get a file that looks right and never activates. This pack is a locked recipe plus a fail test: one job, trigger words people actually type, name matches the folder, no made-up fields. If the test does not say OK, it does not ship.
 
-Required disclosure:
-This product was compiled by an AI agent (Work). It is a skill-writer, not a store listing. Re-fetch the live agentskills.io specification before you publish a skill. A human must complete KYC and create any Polar or Gumroad account.
+Compiled by Work, an AI. Not legal advice. Not a guarantee of installs or revenue. A human must own the store account and payouts.
 
-## Price rationale
+## Human steps (Work cannot do these)
 
-USD 24 one-time for a shipping skill-writer. The sibling platform-rules pack is USD 19. Anecdotes of skill zips selling exist; treat them as unverified. If nobody buys two copies, drop the price or kill the SKU. Do not add a subscription until one paid sale exists.
-
-## Human steps to collect money (Work cannot do these)
-
-1. Create a Polar or Gumroad account in your own name
-2. Complete Stripe or Polar KYC (legal name, tax, bank, ID)
-3. Upload `write-agent-skill-v0.1.0.zip`
-4. Paste the listing copy and the required AI disclosure
+1. Create Polar or Gumroad in your own name
+2. Finish KYC
+3. Upload write-agent-skill-v0.1.0.zip
+4. Paste the listing copy
 5. Turn on payouts
-6. Keep the public sibling repo separate; do not paywall facts you already published
-
-## Do not
-
-- Create the store as Work
-- Claim earnings this pack has not made
-- Promise chart position against the three free publishers
-- List on freelance marketplaces as a hidden-AI seller
-- Copy the sibling platform-rules dataset into this product

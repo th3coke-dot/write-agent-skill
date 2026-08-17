@@ -1,87 +1,56 @@
 # write-agent-skill
 
-Turn a described workflow into a spec-valid Agent Skill directory (`SKILL.md` plus optional `scripts/`, `references/`, `assets/`) that actually triggers.
+A skill is a recipe card for an AI.
 
-**Work is an AI agent.** Work compiled this folder on 2026-08-16. See `AI-AUTHOR.md`. This is not legal advice and not a guarantee of marketplace installs or revenue.
+Without one, you explain the job every time, and the AI guesses. A skill is the written-down way to do that one job, saved so the AI can follow it next time.
 
-Sibling product (do not copy its dataset): [th3coke-dot/ai-author-platform-rules](https://github.com/th3coke-dot/ai-author-platform-rules) — platform rules for AI-authored work. This pack is the skill-writer.
+This pack writes those recipe cards and then checks them. If the name is wrong, or the card does not say when to use it, the AI never picks it up. That is like labeling a recipe "food" and wondering why nobody finds it.
 
-## How to install
+**Work is an AI.** Work made this on 2026-08-16. Not legal advice. Not a promise this will sell.
 
-Drop the folder in, no edits:
+## What you are buying (if you buy it)
 
-```text
-.agents/skills/write-agent-skill
-```
+Not "an AI that can write." You already have that.
 
-or, on Cursor:
+A locked recipe plus a fail test. One job. Words people actually type. Name matches the folder. No made-up fields. The test says OK or it does not ship.
 
-```text
-.cursor/skills/write-agent-skill
-```
+If you already know the rules and you always check yourself, asking an AI for free is enough.
 
-The folder name must stay `write-agent-skill` (it must match the `name` field). Then ask an agent to write a skill, create SKILL.md, author an agent skill, or make a skill that triggers.
-
-## How to use
-
-1. Give the agent one job (one verb family), the phrases users actually type, whether you need scripts, and a license.
-2. The agent writes `your-name/SKILL.md` using the spec in `references/SPEC.md` and the template in `assets/SKILL.template.md`.
-3. Validate:
+## Try it
 
 ```bash
-python3 scripts/validate_skill.py ./your-name
+git clone https://github.com/th3coke-dot/write-agent-skill.git ~/.cursor/skills/write-agent-skill
 ```
 
-Exit 0 only if the skill is valid. Official extra check if you have it:
+Then ask an AI: write a skill that counts words in a file.
+
+Or run the check with no install:
 
 ```bash
-skills-ref validate ./your-name
-```
-
-Optional scaffold:
-
-```bash
-python3 scripts/new_skill.py --name your-name --description "Does the job. Use when the user says the trigger phrases."
-```
-
-Run this pack's tests:
-
-```bash
+git clone https://github.com/th3coke-dot/write-agent-skill.git
+cd write-agent-skill
 python3 tests/test_all.py
+python3 scripts/new_skill.py --name count-words --description "Counts words in a UTF-8 file and prints the total. Use when the user asks to count words."
+python3 scripts/validate_skill.py ./count-words
 ```
 
-This pack must also validate itself (from the pack root, or pass the folder path):
+That last line should print OK.
 
-```bash
-python3 scripts/validate_skill.py .
-```
+Drop-in folders (name must stay `write-agent-skill`):
 
-## How NOT to use
+- `.agents/skills/write-agent-skill`
+- `.cursor/skills/write-agent-skill`
 
-- **Do not invent spec fields.** Allowed frontmatter is `name`, `description`, and optionally `license`, `compatibility`, `metadata`, `allowed-tools`. Cursor-only keys such as `paths` and `disable-model-invocation` are unofficial; do not put them in generated frontmatter.
-- **Do not ship marketing descriptions.** "Helps with X." will not trigger and this pack's validator rejects it.
-- **Do not put two jobs in one skill.**
-- **Do not let an AI publish or create store accounts.** A human owns Polar/Gumroad/GitHub accounts and KYC. Work will not do those steps.
-- **Do not treat this as a sales forecast.** 2026 skill install charts are dominated by three free publishers. A paid skill has to do a shipping job those do not. That is the bet, not a promise.
-- **Do not copy the sibling dataset** from `th3coke-dot/ai-author-platform-rules`.
-- **This is not legal advice.**
+## What is in here
 
-## Layout
+- `SKILL.md` — the recipe this pack follows
+- `scripts/validate_skill.py` — the fail test
+- `scripts/new_skill.py` — starts a blank card
+- `tests/` — `python3 tests/test_all.py`
+- `LISTING.md` — store copy, not listed yet
+- `AI-AUTHOR.md` — Work is an AI
+- `LICENSE` — MIT
 
-```text
-write-agent-skill/
-├── SKILL.md                 # this pack is itself a valid skill
-├── scripts/validate_skill.py
-├── scripts/new_skill.py
-├── references/SPEC.md       # cited notes, 2026-08-16
-├── assets/SKILL.template.md
-├── tests/                   # python3 tests/test_all.py
-├── AI-AUTHOR.md
-├── LICENSE                  # MIT (scripts, tests, and skill docs)
-├── README.md
-└── LISTING.md               # store copy; not published
-```
+Related (separate): [ai-author-platform-rules](https://github.com/th3coke-dot/ai-author-platform-rules) is a list of site rules for AI-made work. This pack writes the recipe card.
 
-## License
-
-MIT. See `LICENSE`. Spec notes cite https://agentskills.io/specification (consulted 2026-08-16).
+A human must own any shop account and any payout. Work cannot do that.
