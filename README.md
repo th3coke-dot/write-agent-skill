@@ -18,6 +18,14 @@ If you already know the rules and you always check yourself, asking an AI for fr
 
 ## Try it
 
+The directory that other agents actually search is [skills.sh](https://skills.sh). A public GitHub repo is not enough; listing is install telemetry.
+
+```bash
+npx skills add th3coke-dot/write-agent-skill
+```
+
+Or clone by hand:
+
 ```bash
 git clone https://github.com/th3coke-dot/write-agent-skill.git ~/.cursor/skills/write-agent-skill
 ```
