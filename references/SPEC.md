@@ -1,65 +1,42 @@
-# Agent Skills spec notes (cited)
+# Agent Skills format and local validation
 
-Source: https://agentskills.io/specification  
-Consulted: 2026-08-16  
-Also compared to the published source `docs/specification.mdx` in [agentskills/agentskills](https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx).
+Source: [Agent Skills specification](https://agentskills.io/specification), checked 2026-09-05.
 
-These are short notes for authors, not a dump of the specification. Re-fetch the live page before arguing a field.
+## Portable frontmatter
 
-## Directory
+Use YAML frontmatter between opening and closing `---` lines, followed by the instructions.
 
-A skill is a directory whose name matches `name`. Required file: `SKILL.md`. Optional conventional folders: `scripts/`, `references/`, `assets/`. Other files are allowed.
-
-## SKILL.md
-
-YAML frontmatter, then a markdown body. Frontmatter is delimited by `---` at the start of the file.
-
-### Required fields
-
-| Field | Constraints (spec, 2026-08-16) |
+| Field | Format |
 | --- | --- |
-| `name` | 1–64 chars. Unicode lowercase alphanumeric `a-z` `0-9` and hyphens. No leading/trailing hyphen. No consecutive `--`. **Must match the parent directory name.** |
-| `description` | 1–1024 chars, non-empty. Describes **what** the skill does **and when** to use it. Include keywords that help an agent match the task. |
+| name | Required string, 1–64 lowercase letters/numbers/hyphens; no leading, trailing or consecutive hyphens; match the folder name. |
+| description | Required non-empty string, at most 1024 characters. Explain purpose and relevant requests without a required phrase formula. |
+| license | Optional non-empty string naming a license or license file. |
+| compatibility | Optional string, 1–500 characters, describing actual runtime requirements. |
+| metadata | Optional mapping with string keys and string values. Quote dates, numbers and booleans when they are intended as strings. |
+| allowed-tools | Optional non-empty space-separated string; experimental and client-dependent. |
 
-Spec examples for `name`: `pdf-processing`, `data-analysis`, `code-review` are valid. `PDF-Processing`, `-pdf`, `pdf--processing` are invalid.
+This pack targets the portable fields above. Client extensions require the target client's documentation; the portable validator reports unsupported keys. Do not invent fields.
 
-Spec example for `description` (good): "Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs. Use when working with PDF documents or when the user mentions PDFs, forms, or document extraction."
+Folded/literal block strings, quoted strings and inline mappings are valid YAML. The bundled parser uses PyYAML's safe loader with duplicate-key rejection. It preserves value types rather than converting everything to text.
 
-Spec example for `description` (poor): "Helps with PDFs."
+## Instructions and references
 
-### Optional fields — only these
+Keep essential instructions in `SKILL.md`. Put substantial conditional detail in directly discoverable references and repeatable operations in scripts. The specification's size and reference-depth guidance helps context use; it is not a substitute for judging relevance.
 
-| Field | Constraints |
-| --- | --- |
-| `license` | License name or a bundled license file. Keep it short. |
-| `compatibility` | 1–500 characters if present. Environment needs (product, packages, network). Most skills omit it. |
-| `metadata` | Map of **string keys to string values**. Keep keys reasonably unique. |
-| `allowed-tools` | Space-separated string of pre-approved tools. **Experimental.** |
+## Validation boundaries
 
-Do not add any other frontmatter key. This pack's validator rejects unknown keys.
+Install `requirements.txt`, then run:
 
-### Body
+```bash
+python3 scripts/validate_skill.py ./my-skill
+```
 
-No format restrictions. Recommended: steps, examples, edge cases. The whole body loads on activate. Keep `SKILL.md` under 500 lines; move detail to `references/`.
+Format errors fail validation. Weak generic descriptions, entry files over 500 lines and deep reference paths produce house-style warnings. They fail only with `--strict-style`. Neither structural checks nor style heuristics prove that a model will select or successfully use a skill.
 
-## Progressive disclosure
-
-1. **Metadata** — `name` and `description` load at startup for every installed skill.
-2. **Instructions** — full `SKILL.md` body loads when the skill activates.
-3. **Resources** — `scripts/`, `references/`, `assets/` load on demand.
-
-## File references
-
-From `SKILL.md`, use relative paths one level deep (`scripts/extract.py`, `references/SPEC.md`). Avoid nested reference chains.
-
-## Official validation
+For an additional structural check, use the official reference library when installed:
 
 ```bash
 skills-ref validate ./my-skill
 ```
 
-This pack also ships `scripts/validate_skill.py`, which enforces the rules above without installing `skills-ref`.
-
-## Unofficial client-specific extras (NOT in the spec)
-
-Some clients have used extra frontmatter keys such as `paths` and `disable-model-invocation`. Those keys are **not** in the agentskills.io specification consulted on 2026-08-16. Do **not** put them in generated `SKILL.md` frontmatter. If a human needs a client-specific note, put it in `references/` and label it unofficial. This pack's validator rejects those keys.
+Review trigger relevance and observe representative behavior separately. Keep intentionally invalid fixtures as test data rather than installing them.
