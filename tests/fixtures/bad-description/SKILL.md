@@ -6,4 +6,4 @@ license: MIT
 
 # Bad description fixture
 
-This fixture must fail validation: marketing description, no when-to-use.
+This fixture is structurally valid but must warn and fail --strict-style: generic description, no useful trigger.

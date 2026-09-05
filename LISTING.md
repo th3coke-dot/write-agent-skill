@@ -1,7 +1,7 @@
 # Paid pack listing (not published)
 
 Product: write-agent-skill
-Version: 0.1.0
+Version: 0.2.0
 Price: USD 24 one-time
 Rails: Polar or Gumroad
 Status: not listed
@@ -12,11 +12,11 @@ If you just ask an agent to write a skill, it will try. A lot of the time it han
 
 You are not buying "an AI that can write." You already have that.
 
-You are buying a locked recipe plus a fail test. One job. Words people actually type. Name matches the folder. No made-up fields. The test says OK or it does not ship.
+You are buying a focused authoring workflow, a scaffolder and portable-format validation. Structural errors fail; house-style guidance is advisory unless explicitly required.
 
 ## Why pay
 
-So the next skill you publish actually fires when someone asks for it.
+To reduce avoidable packaging errors and write clearer activation descriptions. Model selection and task quality still need behavioral evaluation.
 
 ## Why not pay
 
@@ -26,6 +26,7 @@ If you already know the spec and you always run a validator yourself, asking an 
 
 - The skill (drop into .agents/skills/write-agent-skill)
 - A validator: python3 scripts/validate_skill.py ./your-skill
+- requirements.txt: install PyYAML before running the helpers
 - A scaffolder: python3 scripts/new_skill.py
 - Tests
 - MIT license
@@ -33,10 +34,10 @@ If you already know the spec and you always run a validator yourself, asking an 
 
 ## Listing copy (paste this)
 
-Title: Stop shipping skills that never turn on
+Title: Create and validate reusable Agent Skills
 
 Body:
-Ask an agent to "write a skill" and you often get a file that looks right and never activates. This pack is a locked recipe plus a fail test: one job, trigger words people actually type, name matches the folder, no made-up fields. If the test does not say OK, it does not ship.
+Create or update a focused skill package, scaffold its files and validate its YAML/frontmatter. The validator supports multiline YAML and checks scalar types. Review advisory style guidance separately, then evaluate the skill on representative tasks; passing format checks does not guarantee activation.
 
 Compiled by Work, an AI. Not legal advice. Not a guarantee of installs or revenue. A human must own the store account and payouts.
 
@@ -44,6 +45,6 @@ Compiled by Work, an AI. Not legal advice. Not a guarantee of installs or revenu
 
 1. Create Polar or Gumroad in your own name
 2. Finish KYC
-3. Upload write-agent-skill-v0.1.0.zip
+3. Upload write-agent-skill-v0.2.0.zip
 4. Paste the listing copy
 5. Turn on payouts

@@ -47,17 +47,8 @@ here only if the activated agent needs extra examples.
 
 
 def yaml_scalar(value: str) -> str:
-    """Quote a string when YAML would otherwise misread it."""
-    needs_quote = (
-        not value
-        or value != value.strip()
-        or value[0] in "-?:@&*!|>%'\"{}[]#"
-        or any(c in value for c in ":#{}[]&*?|>!%@`'")
-        or value.lower() in {"true", "false", "null", "yes", "no"}
-    )
-    if needs_quote:
-        return json.dumps(value, ensure_ascii=False)
-    return value
+    """JSON strings are valid YAML scalars, including multiline user input."""
+    return json.dumps(value, ensure_ascii=False)
 
 
 def title_from_name(name: str) -> str:
@@ -116,14 +107,12 @@ def main(argv: list[str] | None = None) -> int:
         license_block = ""
 
     replacements = {
-        "{name}": args.name,
-        "{description}": yaml_scalar(args.description),
-        "{license_block}": license_block,
-        "{title}": title_from_name(args.name),
+        "name": args.name,
+        "description": yaml_scalar(args.description),
+        "license_block": license_block,
+        "title": title_from_name(args.name),
     }
-    text = template
-    for key, val in replacements.items():
-        text = text.replace(key, val)
+    text = template.format_map(replacements)
 
     dest.mkdir(parents=True)
     (dest / "SKILL.md").write_text(text, encoding="utf-8")
